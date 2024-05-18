@@ -25,9 +25,10 @@ void AAuraPlayerController::BeginPlay()
 
 	// Explanation: The Enhanced Input plugin is a plugin that allows you to create input mappings and contexts that can be used to bind actions to keys and buttons.
 	UEnhancedInputLocalPlayerSubsystem * Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
-	check(Subsystem); // Check if the subsystem is valid
-	// Add the AuraContext to the subsystem
-	Subsystem->AddMappingContext(AuraContext, 0);
+	if (Subsystem)
+	{
+		Subsystem->AddMappingContext(AuraContext, 0);
+	}
 	
 	// cursor is not locked to the viewport and is visible
 	bShowMouseCursor = true;
