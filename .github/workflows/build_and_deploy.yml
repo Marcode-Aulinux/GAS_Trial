@@ -16,15 +16,16 @@ jobs:
           lfs: "true"
       - name: Build Aura
         run: |
-          cd AutomationScripts
           ls
-          ./compile.bat "../Aura/Aura.uproject" "../Aura/Build" "Win64"
+          cd Scripts
+          ls
+          ./build.bat "../Aura/Aura.uproject" "../Aura/Build" "Win64"
       - name: Download Butler
         run: |
           curl -o butler.zip https://broth.itch.ovh/butler/windows-amd64/LATEST/archive/default
           powershell Expand-Archive butler.zip
       - name: Publish the build Folder
         run: |
-          ./butler/butler.exe push .\Aura\Build\Windows matioma/storytellingwithdatatst:win-64 --userversion ${{ github.ref_name }}
+          ./butler/butler.exe push .\Aura\Build\Windows tkd/test:win-64 --userversion ${{ github.ref_name }}
         env:
           BUTLER_API_KEY: hr529nh2oniv8nTVaYs4txXRCeZkllxuhtYwBJB7
