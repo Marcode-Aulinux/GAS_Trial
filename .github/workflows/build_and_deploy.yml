@@ -1,0 +1,30 @@
+﻿name: Continuous Deployment Aura Project
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow only on pushes to the main branch
+
+jobs:
+  Build-and-deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        with:
+          lfs: "true"
+      - name: Build Aura
+        run: |
+          cd AutomationScripts
+          ls
+          ./compile.bat "../Aura/Aura.uproject" "../Aura/Build" "Win64"
+      - name: Download Butler
+        run: |
+          curl -o butler.zip https://broth.itch.ovh/butler/windows-amd64/LATEST/archive/default
+          powershell Expand-Archive butler.zip
+      - name: Publish the build Folder
+        run: |
+          ./butler/butler.exe push .\Aura\Build\Windows matioma/storytellingwithdatatst:win-64 --userversion ${{ github.ref_name }}
+        env:
+          BUTLER_API_KEY: hr529nh2oniv8nTVaYs4txXRCeZkllxuhtYwBJB7
