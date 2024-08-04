@@ -1,6 +1,6 @@
 ```mermaid
 
-graph TD
+graph LR
     UObject --> UGameplayAbility
     UGameplayAbility --> UAuraGameplayAbility
     UAuraGameplayAbility --> UAuraProjectileSpell
@@ -57,5 +57,4 @@ graph TD
     classDef default fill:#f9f,stroke:#333,stroke-width:2px;
     classDef interface fill:#ff9,stroke:#333,stroke-width:2px;
     class UCombatInterface,UEnemyInterface,ICombatInterface,IEnemyInterface,IAbilitySystemInterface interface;
-
 ```
